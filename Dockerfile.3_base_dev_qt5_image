@@ -1,0 +1,29 @@
+# syntax = docker/dockerfile:1.0-experimental
+FROM base_dev_image:latest as base_dev_qt5_image
+
+#USER root
+
+RUN apt-get update &&  \
+    apt-get install -y \
+    qt5-default \
+    qtbase5-dev \
+    qtbase5-dev-tools \
+    qtbase5-private-dev \
+    libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev \
+    libqt5gstreamer-dev \
+    libqt5serialport5-dev \
+    libqt5multimedia5 \
+    libqt5multimediawidgets5 \
+    libqt5multimedia5-plugins \
+    libqt5widgets5 \
+    libqt5quickwidgets5 \
+    libqt5quickcontrols2-5 \
+    libqt5gui5 \
+    qtdeclarative5-dev \
+    qtmultimedia5-dev \
+    qtpositioning5-dev \
+    qtwebengine5-dev \
+    qtquickcontrols2-5-dev \
+    qml-module-qtquick-controls \
+    qml-module-qtmultimedia

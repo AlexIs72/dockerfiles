@@ -1,0 +1,11 @@
+# syntax = docker/dockerfile:1.0-experimental
+FROM base_debian_image:latest as base_dev_image
+
+#USER root
+
+RUN apt-get update &&  \
+    apt-get install -y \
+    make cmake cppcheck ctags git \
+    build-essential gcc g++ \
+    dpkg dpkg-dev bison flex libelf-dev \
+    libssl-dev bc
