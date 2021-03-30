@@ -1,0 +1,34 @@
+# syntax = docker/dockerfile:1.0-experimental
+FROM i386/debian:latest as base_debian_image_x86
+
+ARG build_dir=/build
+ARG user_name=builder
+ARG home_dir=/home/${user_name}
+ARG user_id
+ARG group_id
+
+
+RUN apt-get update &&  \
+    apt-get install -y \
+    apt-utils sudo vim openssh-client kmod cpio
+
+RUN addgroup --gid ${group_id} ${user_name} && \
+    adduser --disabled-password --gecos '' --uid ${user_id} --gid ${group_id} ${user_name} && \
+    adduser ${user_name} sudo && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >  /etc/sudoers.d/sudo_grp && \
+    echo "${user_name} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/${user_name} && \
+    chmod 0440 /etc/sudoers.d/${user_name}
+
+RUN mkdir -p ${home_dir}/.ssh && \
+    chmod 0700 ${home_dir}/.ssh
+
+RUN --mount=type=secret,id=ssh_id \
+    cp /run/secrets/ssh_id ${home_dir}/.ssh/id_rsa
+
+RUN ssh-keyscan github.com > ${home_dir}/.ssh/known_hosts && \
+    ssh-keyscan 192.168.30.20 >> ${home_dir}/.ssh/known_hosts
+
+RUN chown -R ${user_name}:${user_name} ${home_dir}
+
+
+#USER ${user_name}
