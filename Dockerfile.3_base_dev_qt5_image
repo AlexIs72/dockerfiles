@@ -25,5 +25,9 @@ RUN apt-get update &&  \
     qtpositioning5-dev \
     qtwebengine5-dev \
     qtquickcontrols2-5-dev \
-    qml-module-qtquick-controls \
+    qml-module-qtquick2 \ 
+    qml-module-qtquick-controls2 \
     qml-module-qtmultimedia
+
+
+#    qml-module-qtquick-controls \
