@@ -27,6 +27,7 @@ RUN apt-get update &&  \
     qtquickcontrols2-5-dev \
     qml-module-qtquick2 \ 
     qml-module-qtquick-controls2 \
+    qml-module-qtquick-window2 \
     qml-module-qtmultimedia
 
 
