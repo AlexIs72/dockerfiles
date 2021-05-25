@@ -1,0 +1,9 @@
+# syntax = docker/dockerfile:1.0-experimental
+FROM base_dev_image:latest as base_dev_rpi_image
+
+RUN apt-get update && apt-get install -y \
+    bc \
+    libssl-dev \
+    crossbuild-essential-arm64
+    
+#    libc6-dev libncurses5-dev
